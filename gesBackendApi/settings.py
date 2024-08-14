@@ -93,10 +93,11 @@ AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_ENDPOINT_URL")
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.r2.cloudflarestorage.com'
 
-# CORS_ORIGIN_WHITELIST = [
-#     "http://127.0.0.1:8000",
-#     "https://global-electronics.vercel.app"
-# ]
+CORS_ORIGIN_WHITELIST = [
+    "http://127.0.0.1:8000",
+    "https://global-electronics.vercel.app",
+    "https://check.globalelectronicsolutions.in"
+]
 
 CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'gesBackendApi.urls'
