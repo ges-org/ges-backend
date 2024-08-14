@@ -18,13 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
+      - name: Use python
+        uses: actions/setup-python@v3
         with:
-          node-version: '20'  
+          python-version: '12'  
 
       - name: Install Dependencies
-        run: npm install 
-        
-      - name: Run Build
-        run: npm run build
+        run: pip install -r requirements.txt
+         
