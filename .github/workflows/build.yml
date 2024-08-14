@@ -3,7 +3,7 @@ name: Build Succeeds on Push
 on: 
   push:
     branches:
-      - main
+      - master
 env: 
   AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
   AWS_S3_ENDPOINT_URL: ${{ secrets.AWS_S3_ENDPOINT_URL }}
