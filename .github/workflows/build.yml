@@ -12,7 +12,7 @@ env:
   PGDATABASE: ${{ secrets.PGDATABASE }}
   PGHOST: ${{ secrets.PGHOST }}
   PGPASSWORD: ${{ secrets.PGPASSWORD }}
-  PGUSER: = ${{ secrets.PGUSER }}
+  PGUSER: ${{ secrets.PGUSER }}
 jobs:
   build: 
     runs-on: ubuntu-latest
