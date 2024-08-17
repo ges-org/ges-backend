@@ -69,7 +69,7 @@ INSTALLED_APPS = [
 
 ]
 
-    MIDDLEWARE = [
+MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -97,7 +97,6 @@ AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_ENDPOINT_URL")
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.r2.cloudflarestorage.com'
 
-<<<<<<< HEAD
 CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:8000",
     "https://global-electronics.vercel.app"
@@ -106,25 +105,6 @@ CORS_ORIGIN_WHITELIST = [
 CSRF_TRUSTED_ORIGINS = [', '] 
 
 CORS_ORIGIN_ALLOW_ALL = True
-=======
-CSRF_TRUSTED_ORIGINS = [
-    'https://admin.globalelectronicsolutions.in',
-    'https://check.globalelectronicsolutions.in',
-    'http://127.0.0.1:8000',
-    'http://localhost:8000',
-    'https://gesbackend-production.up.railway.app/',
-
-]
-
-CSRF_COOKIE_DOMAIN = '.globalelectronicsolutions.in'
-CSRF_USE_SESSIONS = True
-CSRF_COOKIE_HTTPONLY = False 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = False
-CORS_ALLOW_ALL_ORIGINS = True
-
->>>>>>> 36d5eaecb0a0dc3a0ce4adc68e69ca71f48ff4e3
 ROOT_URLCONF = 'gesBackendApi.urls'
 
 TEMPLATES = [
