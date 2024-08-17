@@ -10,11 +10,11 @@ def cache_result(timeout=3600):
         @wraps(func)
         def wrapper(self, obj):
             # Use obj directly if it's a primitive type, otherwise use its id
-            cache_key = f'{func.__name__}_{obj if isinstance(obj, (int, str)) else obj.id}'
-            result = cache.get(cache_key)
-            if result is None:
-                result = func(self, obj)
-                cache.set(cache_key, result, timeout)
+            # cache_key = f'{func.__name__}_{obj if isinstance(obj, (int, str)) else obj.id}'
+            # result = cache.get(cache_key)
+            # if result is None:
+            result = func(self, obj)
+                # cache.set(cache_key, result, timeout)
             return result
         return wrapper
     return decorator
