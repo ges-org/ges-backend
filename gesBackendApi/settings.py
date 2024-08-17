@@ -102,7 +102,8 @@ CORS_ORIGIN_WHITELIST = [
     "https://global-electronics.vercel.app"
 ]
 
-CSRF_TRUSTED_ORIGINS = [', '] 
+CSRF_TRUSTED_ORIGINS = ["https://check.globalelectronicsolutions.in"]
+CSRF_ALLOWED_ORIGINS = ["https://check.globalelectronicsolutions.in"]
 
 CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'gesBackendApi.urls'
