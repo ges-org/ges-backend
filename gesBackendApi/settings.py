@@ -42,7 +42,12 @@ SECRET_KEY = 'django-insecure-ydl-mx!s0a4b^!^1=+p677mye1@$#4ycri0nr!m1l2s+9-srl^
 DEBUG = True
 
 # ALLOWED_HOSTS = ["localhost", "gesadmin.localhost"] #for local testing, else empty would work
-ALLOWED_HOSTS = ["*"] #for local testing, else empty would work
+ALLOWED_HOSTS = [    
+    'admin.globalelectronicsolutions.in',
+    'globalelectronicsolutions.in',
+    'localhost',
+    '127.0.0.1:8000'
+    ] #for local testing, else empty would work
 
 ROOT_HOSTCONF = 'gesBackendApi.hosts'
 DEFAULT_HOST = ' ' # name in host(r'', mysite.urls, name=' ')
