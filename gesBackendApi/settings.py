@@ -106,7 +106,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 ]
 
-CSRF_COOKIE_DOMAIN = 'admin.globalelectronicsolutions.in'
+CSRF_COOKIE_DOMAIN = '.globalelectronicsolutions.in'
 CSRF_USE_SESSIONS = True
 CSRF_COOKIE_HTTPONLY = True 
 SESSION_COOKIE_SECURE = True
