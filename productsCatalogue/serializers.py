@@ -9,7 +9,8 @@ def cache_result(timeout=3600):
     def decorator(func):
         @wraps(func)
         def wrapper(self, obj):
-            cache_key = f'{func.__name__}_{obj.id}'
+            # Use obj directly if it's a primitive type, otherwise use its id
+            cache_key = f'{func.__name__}_{obj if isinstance(obj, (int, str)) else obj.id}'
             result = cache.get(cache_key)
             if result is None:
                 result = func(self, obj)
@@ -148,7 +149,7 @@ class SingleProductSerializer(serializers.ModelSerializer):
 
     @cache_result()
     def get_product_image(self, product_id):
-        first_image = ProductImage.objects.filter(product_id=product_id).first()
+        first_image = ProductImage.objects.filter(product_id=product_id).only('image').first()
         return f"/{first_image.image.name}" if first_image else None
 
 class SearchProductSerializer(serializers.ModelSerializer):
