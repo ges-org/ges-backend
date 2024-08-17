@@ -45,7 +45,9 @@ DEBUG = True
 ALLOWED_HOSTS = [    
     'admin.globalelectronicsolutions.in',
     'globalelectronicsolutions.in',
-    'localhost',
+    'https://globalelectronicsolutions.in',
+    'http://globalelectronicsolutions.in',
+    'localhost:8000',
     '127.0.0.1:8000'
     ] #for local testing, else empty would work
 
