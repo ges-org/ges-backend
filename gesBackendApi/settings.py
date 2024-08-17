@@ -43,12 +43,11 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ["localhost", "gesadmin.localhost"] #for local testing, else empty would work
 ALLOWED_HOSTS = [    
-    'admin.globalelectronicsolutions.in',
-    'globalelectronicsolutions.in',
+    'https://admin.globalelectronicsolutions.in',
     'https://globalelectronicsolutions.in',
     'http://globalelectronicsolutions.in',
-    'localhost:8000',
-    '127.0.0.1:8000'
+    'http://localhost:8000',
+    'http://127.0.0.1:8000'
     ] #for local testing, else empty would work
 
 ROOT_HOSTCONF = 'gesBackendApi.hosts'
@@ -109,7 +108,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_DOMAIN = '.globalelectronicsolutions.in'
+CSRF_COOKIE_DOMAIN = 'admin.globalelectronicsolutions.in'
 CSRF_COOKIE_SECURE = True  
 CSRF_USE_SESSIONS = True
 CSRF_COOKIE_HTTPONLY = True 
