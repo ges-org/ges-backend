@@ -20,6 +20,17 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+class CSRFDebugMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        print(f"CSRF Cookie: {request.COOKIES.get('csrftoken')}")
+        print(f"CSRF Token in POST: {request.POST.get('csrfmiddlewaretoken')}")
+        print(f"Referer: {request.META.get('HTTP_REFERER')}")
+        print(f"Origin: {request.META.get('HTTP_ORIGIN')}")
+        response = self.get_response(request)
+        return response
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -31,7 +42,13 @@ SECRET_KEY = 'django-insecure-ydl-mx!s0a4b^!^1=+p677mye1@$#4ycri0nr!m1l2s+9-srl^
 DEBUG = True
 
 # ALLOWED_HOSTS = ["localhost", "gesadmin.localhost"] #for local testing, else empty would work
-ALLOWED_HOSTS = ["*"] #for local testing, else empty would work
+ALLOWED_HOSTS = [    
+    'https://admin.globalelectronicsolutions.in',
+    'https://globalelectronicsolutions.in',
+    'http://globalelectronicsolutions.in',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000'
+    ] #for local testing, else empty would work
 
 ROOT_HOSTCONF = 'gesBackendApi.hosts'
 DEFAULT_HOST = ' ' # name in host(r'', mysite.urls, name=' ')
@@ -53,29 +70,16 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-
-    # # 'corsheaders.middleware.CorsMiddleware',
-    # # 'restrictAdmin.views.if404Middleware',
-    # # 'django_hosts.middleware.HostsRequestMiddleware',
-    # 'django.middleware.security.SecurityMiddleware',
-    # 'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
-    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # 'django.contrib.messages.middleware.MessageMiddleware',
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # # 'restrictAdmin.views.RestrictStaffToAdminMiddleware',
-    # # 'allauth.account.middleware.AccountMiddleware',
-    # # 'django_hosts.middleware.HostsResponseMiddleware'
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 REST_FRAMEWORK = {
@@ -93,13 +97,10 @@ AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_ENDPOINT_URL")
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.r2.cloudflarestorage.com'
 
-CORS_ORIGIN_WHITELIST = [
-    "http://127.0.0.1:8000",
-    "https://global-electronics.vercel.app"
-]
-
-CSRF_TRUSTED_ORIGINS = ["https://check.globalelectronicsolutions.in/gesadmin/","https://admin.globalelectronicsolutions.in/gesadmin/"]
-CSRF_ALLOWED_ORIGINS = ["https://check.globalelectronicsolutions.in/gesadmin/","https://admin.globalelectronicsolutions.in/gesadmin/"]
+# CORS_ORIGIN_WHITELIST = [
+#     "http://127.0.0.1:8000",
+#     "https://global-electronics.vercel.app"
+# ]
 
 CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'gesBackendApi.urls'
@@ -170,6 +171,8 @@ USE_I18N = True
 USE_TZ = True
 
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -183,5 +186,3 @@ if not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
