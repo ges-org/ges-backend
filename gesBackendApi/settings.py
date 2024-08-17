@@ -20,17 +20,6 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-class CSRFDebugMiddleware:
-    def __init__(self, get_response):
-        self.get_response = get_response
-
-    def __call__(self, request):
-        print(f"CSRF Cookie: {request.COOKIES.get('csrftoken')}")
-        print(f"CSRF Token in POST: {request.POST.get('csrfmiddlewaretoken')}")
-        print(f"Referer: {request.META.get('HTTP_REFERER')}")
-        print(f"Origin: {request.META.get('HTTP_ORIGIN')}")
-        response = self.get_response(request)
-        return response
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -42,13 +31,7 @@ SECRET_KEY = 'django-insecure-ydl-mx!s0a4b^!^1=+p677mye1@$#4ycri0nr!m1l2s+9-srl^
 DEBUG = True
 
 # ALLOWED_HOSTS = ["localhost", "gesadmin.localhost"] #for local testing, else empty would work
-ALLOWED_HOSTS = [    
-    'https://admin.globalelectronicsolutions.in',
-    'https://globalelectronicsolutions.in',
-    'http://globalelectronicsolutions.in',
-    'http://localhost:8000',
-    'http://127.0.0.1:8000'
-    ] #for local testing, else empty would work
+ALLOWED_HOSTS = ["*"] #for local testing, else empty would work
 
 ROOT_HOSTCONF = 'gesBackendApi.hosts'
 DEFAULT_HOST = ' ' # name in host(r'', mysite.urls, name=' ')
@@ -69,6 +52,19 @@ INSTALLED_APPS = [
 
 ]
 
+# MIDDLEWARE = [
+
+#     "django.middleware.security.SecurityMiddleware",
+#     "whitenoise.middleware.WhiteNoiseMiddleware",
+#     "django.contrib.sessions.middleware.SessionMiddleware",
+#     "corsheaders.middleware.CorsMiddleware",
+#     "django.middleware.common.CommonMiddleware",
+#     "django.middleware.csrf.CsrfViewMiddleware",
+#     "django.contrib.auth.middleware.AuthenticationMiddleware",
+#     "django.contrib.messages.middleware.MessageMiddleware",
+#     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -81,6 +77,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# ]
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
@@ -97,10 +95,23 @@ AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_ENDPOINT_URL")
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.r2.cloudflarestorage.com'
 
-# CORS_ORIGIN_WHITELIST = [
-#     "http://127.0.0.1:8000",
-#     "https://global-electronics.vercel.app"
-# ]
+CSRF_TRUSTED_ORIGINS = [
+    'https://admin.globalelectronicsolutions.in',
+    'https://check.globalelectronicsolutions.in',
+    'http://127.0.0.1:8000',
+
+]
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_DOMAIN = '.globalelectronicsolutions.in'
+CSRF_COOKIE_SECURE = True  
+CSRF_USE_SESSIONS = False  
+CSRF_COOKIE_HTTPONLY = True 
+
+
+CSRF_TRUSTED_ORIGINS = ["https://check.globalelectronicsolutions.in","https://admin.globalelectronicsolutions.in"]
+CSRF_ALLOWED_ORIGINS = ["https://check.globalelectronicsolutions.in","https://admin.globalelectronicsolutions.in"]
+
 
 CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'gesBackendApi.urls'

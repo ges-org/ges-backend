@@ -33,10 +33,10 @@ jobs:
           PGHOST= ${{ secrets.PGHOST }}
           PGPASSWORD= ${{ secrets.PGPASSWORD }}
           PGUSER= ${{ secrets.PGUSER }}
-        tags: sudheer007dfs/ges-backend:v9
+        tags: sudheer007dfs/ges-backend:v11
 
     - name: Verify Pushed Image
-      run: docker pull sudheer007dfs/ges-backend:v9
+      run: docker pull sudheer007dfs/ges-backend:v11
 
     - name: Deploy to EC2
       uses: appleboy/ssh-action@master
