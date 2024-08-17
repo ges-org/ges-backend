@@ -20,6 +20,17 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+class CSRFDebugMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        print(f"CSRF Cookie: {request.COOKIES.get('csrftoken')}")
+        print(f"CSRF Token in POST: {request.POST.get('csrfmiddlewaretoken')}")
+        print(f"Referer: {request.META.get('HTTP_REFERER')}")
+        print(f"Origin: {request.META.get('HTTP_ORIGIN')}")
+        response = self.get_response(request)
+        return response
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -53,7 +64,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-
+    "CSRFDebugMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
