@@ -19,4 +19,4 @@ ADD . /gesBackendApi/
 RUN pip install -r requirements.txt
 
 # Run the migration commands and then start the server
-CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && gunicorn gesBackendApi.wsgi:application --bind 0.0.0.0:8000 --workers 3"]
+CMD ["sh", "-c", "gunicorn gesBackendApi.wsgi:application --bind 0.0.0.0:8000 --workers 3"]
